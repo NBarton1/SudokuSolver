@@ -8,8 +8,7 @@ public class SudokuSolver {
     public static void main(String[] args) {
         Puzzle puzzle = new Puzzle();
         Scanner in = new Scanner(System.in);
-        //puzzle.readFile(errorFile(in));
-        puzzle.readFile(new File("src\\nothing"));
+        puzzle.readFile(errorFile(in));
         Grid grid = new Grid();
         grid.setGrid(puzzle);
         System.out.println("Original grid:");
@@ -19,7 +18,7 @@ public class SudokuSolver {
         String solvable = "impossible";
         if(grid.isSolved())
             solvable = "possible";
-        System.out.println(grid + "\nThis sudoku is "+ solvable + "!");
+        System.out.println("Solved puzzle:\n" + grid + "\nThis sudoku is "+ solvable + "!");
     }
 
     /**
@@ -31,7 +30,7 @@ public class SudokuSolver {
         String fileName;
         File file;
         do {
-            System.out.print("Enter a file to read (start with src\\): ");
+            System.out.print("Enter a file to read: ");
             fileName = in.nextLine();
             file = new File(fileName);
         } while(!file.exists());
