@@ -30,12 +30,17 @@ public class Grid {
      * List of numbers 1-N [UNCHANGING]
      */
     private final ArrayList<Integer> NUMS;
+    /**
+     * Whether the puzzle is unique in solution
+     */
+    public boolean unique;
 
     /**
      * Default constructor, sets the constants and adds a Cell to each coordinate in grid
      */
     public Grid() {
         Y = X = N = 9;
+        unique = true;
         NUMS = new ArrayList<>();
         for(int n=1; n<=N; n++) {
             NUMS.add(n);
@@ -53,6 +58,7 @@ public class Grid {
      */
     public Grid(Cell[][] grid) {
         Y = X = N = 9;
+        unique = true;
         NUMS = new ArrayList<>();
         for(int n=1; n<=N; n++) {
             NUMS.add(n);

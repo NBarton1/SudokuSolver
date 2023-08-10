@@ -16,8 +16,11 @@ public class SudokuSolver {
         grid = logic(grid, 0);
 
         String solvable = "impossible";
-        if(grid.isSolved())
-            solvable = "possible";
+        if(!grid.unique)
+            solvable = "possible, but not unique";
+        else if(grid.isSolved()){
+            solvable = "possible and unique";
+        }
         System.out.println("Solved puzzle:\n" + grid + "\nThis sudoku is "+ solvable + "!");
     }
 
@@ -88,6 +91,13 @@ public class SudokuSolver {
                     int guessingSpot = gridCopy.guess();
                     gridCopy = logic(gridCopy, layer+1);
                     if(gridCopy.isPossible()) {
+                        if(gridCopy.unique) {
+                            Grid gridCopy2 = new Grid(grid.copy());
+                            gridCopy2.removeCandidate(guessingSpot);
+                            gridCopy2 = logic(gridCopy2, layer + 1);
+                            if (gridCopy2.isPossible())
+                                gridCopy.unique = false;
+                        }
                         return gridCopy;
                     } else {
                         grid.removeCandidate(guessingSpot);
